@@ -21,9 +21,9 @@ public class Ditch : MonoBehaviour
         Events.MINE_BLAST_EVENT.AddListener(OnMineBlast);
     }
 
-    private void OnMineBlast(HashSet<EntityId> id)
+    private void OnMineBlast(HashSet<EntityId> idSet)
     {
-        if (transform.parent.gameObject.GetEntityId().Equals(id) && liveWormAnimators.Count > 0)
+        if (idSet.Contains(transform.parent.gameObject.GetEntityId()) && liveWormAnimators.Count > 0)
         {
             Debug.Log("Ditch blasted");
             foreach (var worm in liveWormAnimators)

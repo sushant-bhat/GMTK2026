@@ -969,9 +969,9 @@ GameObject:
   - component: {fileID: 395408436}
   - component: {fileID: 395408437}
   - component: {fileID: 395408438}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Mine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1926,10 +1926,10 @@ MonoBehaviour:
   firePoint: {fileID: 385415106}
   bulletPrefab: {fileID: 4815909788296353590, guid: 7b2588ea75fc67141bedd4f570780aba, type: 3}
   detectionRadius: 25
-  gun: {fileID: 0}
+  gun: {fileID: 1924095818}
   targetLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 7424
   tracerLineRenderer: {fileID: 954402424}
   tracerDuration: 0.1
 --- !u!50 &789119908

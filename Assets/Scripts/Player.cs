@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
         canBeShotTags.Add("Soldier");
         canBeShotTags.Add("Sniper");
         canBeShotTags.Add("Worm");
+        canBeShotTags.Add("Mine");
     }
 
     // 1. Called via Unity Event whenever the mouse moves
@@ -84,6 +85,7 @@ public class Player : MonoBehaviour
         if (hit.collider != null)
         {
             endPoint = hit.point;
+            Debug.Log(hit.collider.name);
 
             if (hit.collider.CompareTag("WeakPoint"))
             {

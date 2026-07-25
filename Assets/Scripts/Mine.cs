@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,10 +9,22 @@ public class Mine : MonoBehaviour
     [SerializeField] private LayerMask targetLayers;
     [SerializeField] private int maxTargetsCount = 20;
 
+    void Awake()
+    {
+        Events.BULLET_SHOT_EVENT.AddListener(OnBulletShot);
+    }
+
+    private void OnBulletShot(EntityId id)
+    {
+        if (transform.parent.gameObject.GetEntityId().Equals(id))
+        {
+            Debug.Log("Mine shot");
+            ExplodeAndDetect();
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
-        Destroy(gameObject);
-        Debug.Log("Kaboom");
         ExplodeAndDetect();
     }
     public void ExplodeAndDetect()
@@ -37,11 +50,13 @@ public class Mine : MonoBehaviour
             Collider2D currentCollider = hitResults[i];
             
             // Log the unique Unity 6 Entity ID and GameObject name
-            EntityId eId = currentCollider.gameObject.GetEntityId();
+            Debug.Log(currentCollider.transform.parent.gameObject.name);
+            EntityId eId = currentCollider.transform.parent.gameObject.GetEntityId();
 
             blastVictims.Add(eId);
         }
 
         Events.MINE_BLAST_EVENT.Invoke(blastVictims);
+        Destroy(gameObject);
     }
 }

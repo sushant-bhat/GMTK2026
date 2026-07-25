@@ -9,6 +9,7 @@ TagManager:
   - Sniper
   - WeakPoint
   - Worm
+  - Mine
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Deck
   - Soldier
   - Worm
-  - 
+  - Mine
   - 
   - 
   - 
