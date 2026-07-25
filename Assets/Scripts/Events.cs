@@ -8,6 +8,7 @@ public class Events
 
     public static UnityEvent<HashSet<EntityId>> MINE_BLAST_EVENT = new();
     public static UnityEvent<EntityId> BULLET_SHOT_EVENT = new();
+    public static UnityEvent<EntityId> CANON_SHOT_EVENT = new();
     public static UnityEvent<EntityId> WORM_EATEN_EVENT = new();
 
 }

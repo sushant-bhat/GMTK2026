@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,20 +15,35 @@ public class Troop : MonoBehaviour
     {
         GetComponent<Rigidbody2D>().linearVelocity =  dir * speed * transform.right;
         Events.MINE_BLAST_EVENT.AddListener(OnMineBlast);
+        Events.CANON_SHOT_EVENT.AddListener(OnCanonShot);
+    }
+
+    private void OnCanonShot(EntityId id)
+    {
+        if (gameObject.GetEntityId().Equals(id))
+        {
+            Debug.Log("Kill troop");
+            KillTroop();
+        }
     }
 
     private void OnMineBlast(HashSet<EntityId> idSet)
     {
         if(idSet.Contains(gameObject.GetEntityId()))
         {
-            Debug.Log("Troop " + id + " got blasted");
-            Animator[] soldierAnimators = GetComponentsInChildren<Animator>();
-            
-            for (int i = 0; i < soldierAnimators.Length; i++)
-            {
-                soldierAnimators[i].SetTrigger(DeathHash);
-            }
-            GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+            KillTroop();
         }
+    }
+
+    private void KillTroop()
+    {
+        Debug.Log("Troop " + id + " got blasted");
+        Animator[] soldierAnimators = GetComponentsInChildren<Animator>();
+        
+        for (int i = 0; i < soldierAnimators.Length; i++)
+        {
+            soldierAnimators[i].SetTrigger(DeathHash);
+        }
+        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
     }
 }

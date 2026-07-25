@@ -13,22 +13,20 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        canBeShotTags.Add("Soldier");
-        canBeShotTags.Add("Sniper");
+        canBeShotTags.Add("Troop");
         canBeShotTags.Add("Worm");
-        // Move forward along the bullet's local right axis (X-axis)
-        GetComponent<Rigidbody2D>().linearVelocity =  dir * speed * transform.right;
         Destroy(gameObject, lifetime);
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
         // Handle impact logic here (e.g., damaging enemies)
-        Destroy(gameObject);
+        Debug.Log("Canon hit " + col.gameObject.tag);
         if (canBeShotTags.Contains(col.gameObject.tag) && !alreadyShot)
         {
-            Events.BULLET_SHOT_EVENT.Invoke(col.transform.parent.gameObject.GetEntityId());
+            Events.CANON_SHOT_EVENT.Invoke(col.transform.parent.gameObject.GetEntityId());
             alreadyShot = true;
         }
+        Destroy(gameObject);
     }
 }

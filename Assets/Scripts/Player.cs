@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
         canBeShotTags.Add("Sniper");
         canBeShotTags.Add("Worm");
         canBeShotTags.Add("Mine");
+        canBeShotTags.Add("Officer");
     }
 
     // 1. Called via Unity Event whenever the mouse moves
@@ -119,10 +120,5 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(tracerDuration);
 
         tracerLineRenderer.enabled = false;
-    }
-
-    void Shoot()
-    {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
 }
