@@ -29,6 +29,16 @@ public class Tanker : MonoBehaviour
     {
         isAlive = true;
         Events.MINE_BLAST_EVENT.AddListener(OnMineBlast);
+        Events.BULLET_SHOT_EVENT.AddListener(OnBulletShot);
+    }
+
+    private void OnBulletShot(EntityId id)
+    {
+        if (gameObject.GetEntityId().Equals(id))
+        {
+            tankerAnimator.SetTrigger(DeathHash);
+            isAlive = false;
+        }
     }
 
     private void OnMineBlast(HashSet<EntityId> idSet)

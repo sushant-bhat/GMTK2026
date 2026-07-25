@@ -1787,7 +1787,7 @@ MonoBehaviour:
   gun: {fileID: 1924095818}
   targetLayers:
     serializedVersion: 2
-    m_Bits: 7424
+    m_Bits: 15616
   tracerLineRenderer: {fileID: 954402424}
   tracerDuration: 0.1
 --- !u!50 &789119908
@@ -1865,7 +1865,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &871302206
 Transform:
   m_ObjectHideFlags: 0
@@ -2027,7 +2027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &902579800
 Transform:
   m_ObjectHideFlags: 0
@@ -2933,6 +2933,7 @@ GameObject:
   - component: {fileID: 1465252310}
   - component: {fileID: 1465252311}
   - component: {fileID: 1465252312}
+  - component: {fileID: 1465252313}
   m_Layer: 13
   m_Name: Officer
   m_TagString: Officer
@@ -3051,6 +3052,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.49999997
+--- !u!114 &1465252313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465252309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b72ead61b026d43bc80c9891d0f78d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1466216893
 GameObject:
   m_ObjectHideFlags: 0

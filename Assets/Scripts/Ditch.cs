@@ -19,6 +19,20 @@ public class Ditch : MonoBehaviour
         }
         Events.BULLET_SHOT_EVENT.AddListener(OnBulletShot);
         Events.MINE_BLAST_EVENT.AddListener(OnMineBlast);
+        Events.CANON_SHOT_EVENT.AddListener(OnCanonBlast);
+    }
+
+    private void OnCanonBlast(EntityId id)
+    {
+        if (transform.parent.gameObject.GetEntityId().Equals(id) && liveWormAnimators.Count > 0)
+        {
+            Debug.Log("Ditch canon shot");
+            foreach (var worm in liveWormAnimators)
+            {
+                worm.SetTrigger(DeathHash);
+            }
+            liveWormAnimators.Clear();
+        }
     }
 
     private void OnMineBlast(HashSet<EntityId> idSet)
