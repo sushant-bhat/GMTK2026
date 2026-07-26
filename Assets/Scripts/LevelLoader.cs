@@ -14,7 +14,7 @@ public class LevelLoader : MonoBehaviour
     private void LoadNextLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        sessionSettings.lastLevelPlayed = GetSceneNameByIndex(currentSceneIndex + 1);
+        // sessionSettings.lastLevelPlayed = GetSceneNameByIndex(currentSceneIndex + 1);
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
 

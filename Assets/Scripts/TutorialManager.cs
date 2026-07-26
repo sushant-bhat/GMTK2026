@@ -9,6 +9,12 @@ public class TutorialManager : MonoBehaviour
     void Awake()
     {
         Events.TRIGGER_TUTORIAL_EVENT.AddListener(OnTriggerTutorial);
+        Events.LEVEL_OVER_EVENT.AddListener(OnLevelOver);
+    }
+
+    private void OnLevelOver(LevelOverReason reason)
+    {
+        tutText.enabled = false;
     }
 
     private void OnTriggerTutorial(string text)
