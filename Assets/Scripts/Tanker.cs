@@ -8,7 +8,6 @@ public class Tanker : MonoBehaviour
     private static readonly int ShootHash = Animator.StringToHash("shoot");
     private static readonly int DeathHash = Animator.StringToHash("death");
     private static readonly int DestroyHash = Animator.StringToHash("destroy");
-    private static readonly WaitForSeconds _waitForSeconds1 = new(0.2f);
     [Header("Animation")]
     [SerializeField] private Animator tankerAnimator;
     
@@ -68,7 +67,6 @@ public class Tanker : MonoBehaviour
             soldierTimer = 0f;
             // 2. Trigger shoot animation
             tankerAnimator.SetTrigger(ShootHash);
-
         }
     }
 

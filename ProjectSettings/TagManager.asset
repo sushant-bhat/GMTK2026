@@ -12,6 +12,7 @@ TagManager:
   - Mine
   - Officer
   - Tanker
+  - MG
   layers:
   - Default
   - TransparentFX
@@ -27,8 +28,8 @@ TagManager:
   - Worm
   - Mine
   - Tanker
-  - 
-  - 
+  - Sniper
+  - MG
   - 
   - 
   - 

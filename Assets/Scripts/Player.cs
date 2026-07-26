@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
         mainCamera = Camera.main;
         canBeShotTags.Add("Soldier");
         canBeShotTags.Add("Sniper");
+        canBeShotTags.Add("MG");
         canBeShotTags.Add("Worm");
         canBeShotTags.Add("Mine");
         canBeShotTags.Add("Officer");
