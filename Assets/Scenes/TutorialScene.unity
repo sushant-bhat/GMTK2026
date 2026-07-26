@@ -1108,6 +1108,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MachineGun
       objectReference: {fileID: 0}
+    - target: {fileID: 1525485761690096440, guid: da3e6079a8c01c14fae2bd77832508df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5276759698354481967, guid: da3e6079a8c01c14fae2bd77832508df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.144

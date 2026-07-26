@@ -12,8 +12,10 @@ public class Events
     public static UnityEvent<EntityId> WORM_EATEN_EVENT = new();
     public static UnityEvent<string> SCENE_CHANGE_EVENT = new();
     public static UnityEvent<KilledEventData> KILLED_EVENT = new();
+    public static UnityEvent<LevelOverReason> LEVEL_OVER_EVENT = new();
     public static UnityEvent GAME_PAUSE_EVENT = new();
     public static UnityEvent GAME_RESUME_EVENT = new();
+    public static UnityEvent FIGHTING_ENEMIES_KILLED_EVENT = new();
 
 }
 
@@ -21,6 +23,12 @@ public enum KilledType
 {
     SOLDIER,
     ENEMY
+}
+
+public enum LevelOverReason
+{
+    SOLDIERS_KILLED,
+    ENEMIES_KILLED
 }
 
 public struct KilledEventData

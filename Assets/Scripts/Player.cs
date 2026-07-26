@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,12 @@ public class Player : MonoBehaviour
         canBeShotTags.Add("Mine");
         canBeShotTags.Add("Officer");
         Events.GAME_RESUME_EVENT.AddListener(ResumeGame);
+        Events.LEVEL_OVER_EVENT.AddListener(OnLevelOver);
+    }
+
+    private void OnLevelOver(LevelOverReason reason)
+    {
+        playerInput.enabled = false;
     }
 
     // 1. Called via Unity Event whenever the mouse moves

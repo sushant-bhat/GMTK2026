@@ -17,7 +17,6 @@ public class Soldier : MonoBehaviour
     {
         if (gameObject.GetEntityId().Equals(id) && isAlive)
         {
-            Debug.Log("Soldier killed: " + id.GetHashCode());
             animator.SetTrigger(DeathHash);
             gameObject.transform.SetParent(null);
             isAlive = false;

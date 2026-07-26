@@ -52,7 +52,6 @@ public class Mine : MonoBehaviour
             Collider2D currentCollider = hitResults[i];
             
             // Log the unique Unity 6 Entity ID and GameObject name
-            Debug.Log(currentCollider.transform.parent.gameObject.name);
             EntityId eId = currentCollider.transform.parent.gameObject.GetEntityId();
 
             blastVictims.Add(eId);
