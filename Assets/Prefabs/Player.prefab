@@ -310,7 +310,7 @@ MonoBehaviour:
   weaponPivot: {fileID: 7577589066413214747}
   firePoint: {fileID: 1471827526634841306}
   bulletPrefab: {fileID: 4815909788296353590, guid: 7b2588ea75fc67141bedd4f570780aba, type: 3}
-  detectionRadius: 25
+  detectionRadius: 18
   gun: {fileID: 7577589066413214747}
   targetLayers:
     serializedVersion: 2

@@ -4,13 +4,16 @@ using UnityEngine;
 public class MachineGun : MonoBehaviour
 {
     private static readonly int DeathHash = Animator.StringToHash("death");
+
+    // Animation parameter hashes for performance
+    private static readonly int IsShootingHash = Animator.StringToHash("isShooting");
     private static readonly WaitForSeconds _waitForSeconds1 = new(0.2f);
     [Header("Animation")]
     [SerializeField] private Animator mgAnimator;
     
     [Header("Targets")]
     [SerializeField] private Transform gun;
-    [SerializeField] private float detectionRadius = 25f;
+    [SerializeField] private float detectionRadius = 18f;
     [SerializeField] private LayerMask soldierLayer;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bulletPrefab;
@@ -19,12 +22,10 @@ public class MachineGun : MonoBehaviour
     [SerializeField] private LineRenderer tracerLineRenderer; // Assign a LineRenderer here
     [SerializeField] private float tracerDuration = 0.1f;    // How long the flash stays on screen
 
-
-    // Animation parameter hashes for performance
-    private static readonly int IsShootingHash = Animator.StringToHash("isShooting");
-
-    private float soldierTimer = 10f;
-    private bool isAlive;
+    [SerializeField] private int bulletBurstCount = 15;
+    [SerializeField] private float soldierTimer = 8f;
+    [SerializeField] private float soldierTimerThreshold = 10f;
+    [SerializeField] private bool isAlive;
     private Coroutine activeFireRoutine;
 
     void Awake()
@@ -57,7 +58,7 @@ public class MachineGun : MonoBehaviour
     {
         soldierTimer += Time.deltaTime;
         
-        if (soldierTimer >= 10f)
+        if (soldierTimer >= soldierTimerThreshold)
         {
             soldierTimer = 0f;
             ShootClosestSoldier();
@@ -109,7 +110,7 @@ public class MachineGun : MonoBehaviour
         // 2. Trigger shoot animation
         mgAnimator.SetBool(IsShootingHash, true);
 
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < bulletBurstCount; i++)
         {
             // Execute the shot logic
             ShootRaycast(targetPosition);

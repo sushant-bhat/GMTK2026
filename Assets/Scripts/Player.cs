@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform weaponPivot;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private float detectionRadius = 25f;
+    [SerializeField] private float detectionRadius = 18f;
     [SerializeField] private Transform gun;
     [SerializeField] private LayerMask targetLayers;
 
@@ -121,5 +121,12 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(tracerDuration);
 
         tracerLineRenderer.enabled = false;
+    }
+
+    // Visualizes the 2D detection circle in the Scene View
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

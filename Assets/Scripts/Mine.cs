@@ -7,7 +7,8 @@ public class Mine : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private Collider2D blastRadius;
     [SerializeField] private LayerMask targetLayers;
-    [SerializeField] private int maxTargetsCount = 20;
+    [SerializeField] private int maxTargetsCount = 50;
+    [SerializeField] private int maxBlastVictimsCount = 20;
 
     void Awake()
     {
@@ -45,7 +46,7 @@ public class Mine : MonoBehaviour
 
         Debug.Log($"💥 Blast triggered! Found {totalCollidersFound} colliders inside the zone.");
 
-        HashSet<EntityId> blastVictims = new(20);
+        HashSet<EntityId> blastVictims = new(maxBlastVictimsCount);
         for (int i = 0; i < totalCollidersFound; i++)
         {
             Collider2D currentCollider = hitResults[i];

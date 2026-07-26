@@ -13,8 +13,8 @@ public class Sniper : MonoBehaviour
     [Header("Targets")]
     [SerializeField] private Transform weakPoint;
     [SerializeField] private Transform gun;
-    [SerializeField] private float detectionRadius = 25f;
-    [SerializeField] private LayerMask soldierLayer; // Ensure this mask covers both your Soldiers and the WeakPoint layers
+    [SerializeField] private float detectionRadius = 18f;
+    [SerializeField] private LayerMask targetLayers; // Ensure this mask covers both your Soldiers and the WeakPoint layers
     [SerializeField] private Transform firePoint;
     
     [Header("Visual Effects")]
@@ -25,10 +25,12 @@ public class Sniper : MonoBehaviour
     // Animation parameter hashes for performance
     private static readonly int IsShootingHash = Animator.StringToHash("isShooting");
 
-    private float soldierTimer = 0f;
-    private float weakPointTimer = 0f;
-    private bool isAlive;
-    private bool isAlternateWeakPointTime = true; // Tracks 5th, 15th, 25th vs 10th, 20th, 30th
+    [SerializeField] private float soldierTimer = 0f;
+    [SerializeField] private float soldierTimerThreshold = 2f;
+    [SerializeField] private float weakPointTimer = 0f;
+    [SerializeField] private float weakPointTimerThreshold = 5f;
+    [SerializeField] private bool isAlive;
+    [SerializeField] private bool isAlternateWeakPointTime = true; // Tracks 5th, 15th, 25th vs 10th, 20th, 30th
     
     // Track the coroutine to safely stop it if the sniper dies mid-shot
     private Coroutine activeFireRoutine;
@@ -73,7 +75,7 @@ public class Sniper : MonoBehaviour
         weakPointTimer += Time.deltaTime;
 
         // Check weak point timer first (every 5 seconds)
-        if (weakPointTimer >= 5f)
+        if (weakPointTimer >= weakPointTimerThreshold)
         {
             weakPointTimer = 0f; // Reset loop
 
@@ -86,7 +88,7 @@ public class Sniper : MonoBehaviour
             isAlternateWeakPointTime = !isAlternateWeakPointTime;
         }
         // If it's not time to shoot the weak point, check the soldier timer (every 2 seconds)
-        else if (soldierTimer >= 2f)
+        else if (soldierTimer >= soldierTimerThreshold)
         {
             soldierTimer = 0f;
             ShootClosestSoldier();
@@ -114,7 +116,7 @@ public class Sniper : MonoBehaviour
     private Transform FindClosestSoldier()
     {
         // Find all 2D colliders within radius matching the soldier layer
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, detectionRadius, soldierLayer);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, detectionRadius, targetLayers);
         Transform bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
@@ -171,7 +173,7 @@ public class Sniper : MonoBehaviour
         Vector2 endPoint;
 
         // Perform the single instant hit Raycast
-        RaycastHit2D hit = Physics2D.Raycast(origin, fireDirection, detectionRadius, soldierLayer);
+        RaycastHit2D hit = Physics2D.Raycast(origin, fireDirection, detectionRadius, targetLayers);
 
         // Draws a yellow debug ray in the Unity Scene view for testing
         Debug.DrawRay(origin, fireDirection * detectionRadius, Color.yellow, 0.1f);

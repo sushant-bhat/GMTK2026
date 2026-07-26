@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,17 @@ public class Ditch : MonoBehaviour
 {
     private static readonly int DeathHash = Animator.StringToHash("death");
     [SerializeField] private Animator[] wormAnimators;
-    private readonly HashSet<EntityId> soldiersKilled = new(25);
-    private HashSet<Animator> liveWormAnimators = new(5);
-    private int currentKillCounter = 0;
+    private HashSet<EntityId> soldiersKilled;
+    private HashSet<Animator> liveWormAnimators;
+    [SerializeField] private int currentKillCounter = 0;
+    [SerializeField] private int soldiersKillThreshold = 25;
+    [SerializeField] private int liveWormsThreshold = 5;
+    [SerializeField] private float[] soldierDeathBroadcastDelay;
 
     void Awake()
     {
+        soldiersKilled = new(soldiersKillThreshold);
+        liveWormAnimators = new(liveWormsThreshold);
         foreach (var anim in wormAnimators)
         {
             liveWormAnimators.Add(anim);
@@ -83,7 +89,7 @@ public class Ditch : MonoBehaviour
     
     private IEnumerator BroadcastSoldierDeath(EntityId soldierId)
     {
-        float randomDelay = Random.Range(1f, 3f);
+        float randomDelay = UnityEngine.Random.Range(soldierDeathBroadcastDelay[0], soldierDeathBroadcastDelay[1]);
 
         // Keep a delay in soldier's death to resemble worms slowly eating them
         yield return new WaitForSeconds(randomDelay);

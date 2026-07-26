@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   mgAnimator: {fileID: 5342725852358556643}
   gun: {fileID: 5783313229788389256}
-  detectionRadius: 25
+  detectionRadius: 18
   soldierLayer:
     serializedVersion: 2
     m_Bits: 7168

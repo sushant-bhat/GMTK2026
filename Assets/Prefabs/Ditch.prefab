@@ -227,6 +227,12 @@ MonoBehaviour:
   - {fileID: 4348014452617157597}
   - {fileID: 1865812106974760644}
   - {fileID: 8765613075946496424}
+  currentKillCounter: 0
+  soldiersKillThreshold: 25
+  liveWormsThreshold: 5
+  soldierDeathBroadcastDelay:
+  - 1
+  - 3
 --- !u!1001 &2652339957960895902
 PrefabInstance:
   m_ObjectHideFlags: 0

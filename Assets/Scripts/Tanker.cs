@@ -13,7 +13,7 @@ public class Tanker : MonoBehaviour
     
     [Header("Targets")]
     [SerializeField] private Transform gun;
-    [SerializeField] private float detectionRadius = 25f;
+    [SerializeField] private float detectionRadius = 15f;
     [SerializeField] private LayerMask targetLayers;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject canonPrefab;
@@ -21,8 +21,10 @@ public class Tanker : MonoBehaviour
 
     // Animation parameter hashes for performance
 
-    private float soldierTimer = 10f;
-    private bool isAlive;
+    [SerializeField] private float canonSpeed = 15f;
+    [SerializeField] private float soldierTimer = 10f;
+    [SerializeField] private float soldierTimerThreshold = 12f;
+    [SerializeField] private bool isAlive;
 
     void Awake()
     {
@@ -62,7 +64,7 @@ public class Tanker : MonoBehaviour
     {
         soldierTimer += Time.deltaTime;
         
-        if (soldierTimer >= 12f)
+        if (soldierTimer >= soldierTimerThreshold)
         {
             soldierTimer = 0f;
             // 2. Trigger shoot animation
@@ -117,13 +119,12 @@ public class Tanker : MonoBehaviour
         GameObject canon = Instantiate(canonPrefab, firePoint.position, firePoint.rotation);
         
         // FIX: Calculate direction from the actual SPAWN POINT (firePoint) to the target
-        Vector3 bulletDirection = (targetPosition - firePoint.position).normalized;
+        Vector3 canonDirection = (targetPosition - firePoint.position).normalized;
         
         // Assign the corrected trajectory vector to the Rigidbody2D
         // (Note: generalized to Vector2 to prevent any Z-axis calculation interference)
-        canon.GetComponent<Rigidbody2D>().linearVelocity = (Vector2)bulletDirection * 15f;
+        canon.GetComponent<Rigidbody2D>().linearVelocity = (Vector2) canonDirection * canonSpeed;
     }
-
 
     // Visualizes the 2D detection circle in the Scene View
     private void OnDrawGizmosSelected()

@@ -4,6 +4,7 @@ public class TroopManager : MonoBehaviour
 {
     [SerializeField] private string offsetParamName = "MarchOffset";
     [SerializeField] private float delayStep = 0.1f; // The delay gap between each soldier
+    [SerializeField] private float offSetCycle = 1.0f; // The delay gap between each soldier
 
     void Start()
     {
@@ -16,7 +17,7 @@ public class TroopManager : MonoBehaviour
         {
             // Calculate a normalized offset value between 0.0 and 1.0
             // Multiplying by delayStep staggers them incrementally (e.g., 0.0, 0.1, 0.2...)
-            float calculatedOffset = (i * delayStep) % 1.0f;
+            float calculatedOffset = (i * delayStep) % offSetCycle;
 
             // Apply the offset directly to this specific soldier's instance
             soldierAnimators[i].SetFloat(offsetHash, calculatedOffset);
