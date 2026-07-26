@@ -408,6 +408,10 @@ MonoBehaviour:
     m_Bits: 128
   firePoint: {fileID: 8976359361708673343}
   canonPrefab: {fileID: 5341086220074838233, guid: 42129b3d5e2f2b44ea4c79c14dd3f1d3, type: 3}
+  canonSpeed: 15
+  soldierTimer: 10
+  soldierTimerThreshold: 12
+  isAlive: 0
 --- !u!114 &1823473326929338372
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -102,12 +102,18 @@ MonoBehaviour:
   weakPoint: {fileID: 0}
   gun: {fileID: 7039670716522308052}
   detectionRadius: 18
-  soldierLayer:
+  targetLayers:
     serializedVersion: 2
     m_Bits: 1024
   firePoint: {fileID: 7198668785332432817}
   tracerLineRenderer: {fileID: 7799179534130667218}
   tracerDuration: 0.1
+  soldierTimer: 0
+  soldierTimerThreshold: 2
+  weakPointTimer: 0
+  weakPointTimerThreshold: 5
+  isAlive: 0
+  isAlternateWeakPointTime: 1
 --- !u!1 &3897445919883157465
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,8 +459,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.38899612
-        value: 0.35609818
+        time: 0
+        value: 0.047619052
         inSlope: 0
         outSlope: 0
         tangentMode: 0

@@ -1802,7 +1802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2002cee7c2aae40a8b34224004ec40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  startLevel: TutorialScene
+  startLevel: current
   pauseMenu: {fileID: 2391866934585976189}
   levelOverMenu: {fileID: 4458758210847733875}
 --- !u!1 &6356077476373346728

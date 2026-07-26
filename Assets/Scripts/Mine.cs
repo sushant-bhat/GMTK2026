@@ -26,11 +26,12 @@ public class Mine : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Tanker")) return;
+        if (col.gameObject.CompareTag("Tanker") || col.gameObject.CompareTag("Officer")) return;
         ExplodeAndDetect();
     }
     public void ExplodeAndDetect()
     {
+        Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, 1));
 
         // Create a pre-allocated array to avoid Garbage Collection (GC) spikes at runtime
         Collider2D[] hitResults = new Collider2D[maxTargetsCount];

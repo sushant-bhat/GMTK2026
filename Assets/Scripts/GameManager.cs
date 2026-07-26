@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         Events.SCENE_CHANGE_EVENT.Invoke(startLevel);
         pauseMenu.SetActive(false);
         levelOverMenu.SetActive(false);
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     public void StartNewGame()
     {
+        Time.timeScale = 1;
         Events.SCENE_CHANGE_EVENT.Invoke("TutorialScene");
         pauseMenu.SetActive(false);
         levelOverMenu.SetActive(false);
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        Time.timeScale = 1;
         Events.SCENE_CHANGE_EVENT.Invoke("");
         pauseMenu.SetActive(false);
         levelOverMenu.SetActive(false);

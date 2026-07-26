@@ -43,6 +43,7 @@ public class Sniper : MonoBehaviour
 
     private void OnBulletShot(EntityId id)
     {
+        if (!isAlive) return;
         if (gameObject.GetEntityId().Equals(id))
         {
             Debug.Log("Sniper shot");

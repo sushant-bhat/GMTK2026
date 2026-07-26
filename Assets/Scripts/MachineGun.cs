@@ -36,6 +36,7 @@ public class MachineGun : MonoBehaviour
 
     private void OnBulletShot(EntityId id)
     {
+        if (!isAlive) return;
         if (gameObject.GetEntityId().Equals(id))
         {
             Debug.Log("Machine gunner shot");

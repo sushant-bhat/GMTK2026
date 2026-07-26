@@ -37,6 +37,7 @@ public class Ditch : MonoBehaviour
             {
                 worm.SetTrigger(DeathHash);
             }
+            Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, liveWormAnimators.Count));
             liveWormAnimators.Clear();
         }
     }
@@ -50,6 +51,7 @@ public class Ditch : MonoBehaviour
             {
                 worm.SetTrigger(DeathHash);
             }
+            Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, liveWormAnimators.Count));
             liveWormAnimators.Clear();
         }
     }
@@ -62,6 +64,7 @@ public class Ditch : MonoBehaviour
             Animator anim = liveWormAnimators.First();
             liveWormAnimators.Remove(anim);
             anim.SetTrigger(DeathHash);
+            Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, 1));
         }
     }
 
@@ -70,7 +73,7 @@ public class Ditch : MonoBehaviour
         if (col.gameObject.CompareTag("Soldier") && liveWormAnimators.Count > 0)
         {
             EntityId soldierId = col.transform.parent.gameObject.GetEntityId();
-            if (soldiersKilled.Count >= 25 || soldiersKilled.Contains(soldierId))
+            if (soldiersKilled.Count >= soldiersKillThreshold || soldiersKilled.Contains(soldierId))
             {
                 return;
             }
@@ -82,6 +85,7 @@ public class Ditch : MonoBehaviour
                 Animator anim = liveWormAnimators.First();
                 liveWormAnimators.Remove(anim);
                 anim.SetTrigger(DeathHash);
+                Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, 1));
             }
             StartCoroutine(BroadcastSoldierDeath(soldierId));
         }
