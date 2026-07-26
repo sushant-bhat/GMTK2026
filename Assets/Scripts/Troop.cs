@@ -17,6 +17,7 @@ public class Troop : MonoBehaviour
         GetComponent<Rigidbody2D>().linearVelocity =  dir * speed * transform.right;
         Events.MINE_BLAST_EVENT.AddListener(OnMineBlast);
         Events.CANON_SHOT_EVENT.AddListener(OnCanonShot);
+        Events.PLAY_SOUND_EVENT.Invoke(new PlaySoundEventData(Sounds.SHOOT, "Troop"));
         isAlive = true;
     }
 

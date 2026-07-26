@@ -17,6 +17,7 @@ public class MachineGun : MonoBehaviour
     [SerializeField] private LayerMask soldierLayer;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private ParticleSystem particleSystem;
     
     [Header("Visual Effects")]
     [SerializeField] private LineRenderer tracerLineRenderer; // Assign a LineRenderer here
@@ -111,6 +112,7 @@ public class MachineGun : MonoBehaviour
 
         // 2. Trigger shoot animation
         mgAnimator.SetBool(IsShootingHash, true);
+        Events.PLAY_SOUND_EVENT.Invoke(new PlaySoundEventData(Sounds.SHOOT, "MG"));
 
         for (int i = 0; i < bulletBurstCount; i++)
         {
@@ -127,6 +129,7 @@ public class MachineGun : MonoBehaviour
 
     private void ShootRaycast(Vector3 targetPosition)
     {
+        particleSystem.Play();
         // Use the firePoint position if assigned, otherwise fall back to the gun's position
         Vector2 origin = firePoint != null ? (Vector2)firePoint.position : (Vector2)gun.position;
         

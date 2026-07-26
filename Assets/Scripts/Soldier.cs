@@ -20,6 +20,7 @@ public class Soldier : MonoBehaviour
             animator.SetTrigger(DeathHash);
             gameObject.transform.SetParent(null);
             isAlive = false;
+            Events.PLAY_SOUND_EVENT.Invoke(new PlaySoundEventData(Sounds.DEATH, "Soldier"));
             Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.SOLDIER, 1));
         }
     }

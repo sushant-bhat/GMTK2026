@@ -59,6 +59,7 @@ MonoBehaviour:
   id: 1
   speed: 0.2
   dir: -1
+  isAlive: 0
 --- !u!50 &1297717165780289229
 Rigidbody2D:
   serializedVersion: 5
@@ -877,6 +878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   animator: {fileID: 7861707090604953312}
+  isAlive: 0
 --- !u!4 &7503933903519770518 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2074705075454545544, guid: f71b6e50fac88954d93a20e5cba4f2bf, type: 3}

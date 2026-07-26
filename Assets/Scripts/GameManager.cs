@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string startLevel;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject levelOverMenu;
+    [SerializeField] private SessionSettingsSO sessionSettings;
 
     void Awake()
     {
@@ -18,13 +19,6 @@ public class GameManager : MonoBehaviour
     private void OnLevelOver(LevelOverReason reason)
     {
         Time.timeScale = 0;
-        if (reason.Equals(LevelOverReason.ENEMIES_KILLED))
-        {
-            levelOverMenu.SetActive(true);
-        } else
-        {
-            levelOverMenu.SetActive(true);
-        }
     }
 
     void Start()
@@ -71,6 +65,14 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false);
         levelOverMenu.SetActive(false);
         Events.GAME_RESUME_EVENT.Invoke();
+    }
+
+    public void ResumeLastPlayed()
+    {
+        Time.timeScale = 1;
+        pauseMenu.SetActive(false);
+        levelOverMenu.SetActive(false);
+        Events.SCENE_CHANGE_EVENT.Invoke(sessionSettings.lastLevelPlayed);
     }
 
     public void QuitToMainMenu()

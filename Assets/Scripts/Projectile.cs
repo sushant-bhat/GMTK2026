@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float speed = 15f;
     [SerializeField] private float lifetime = 3f;
     [SerializeField] private float dir = -1f;
+    [SerializeField] private ParticleSystem particleSystem;
     private HashSet<string> canBeShotTags = new();
 
     private bool alreadyShot;
@@ -22,6 +23,7 @@ public class Projectile : MonoBehaviour
     {
         // Handle impact logic here (e.g., damaging enemies)
         Debug.Log("Canon hit " + col.gameObject.tag);
+        particleSystem.Play();
         if (canBeShotTags.Contains(col.gameObject.tag) && !alreadyShot)
         {
             Events.CANON_SHOT_EVENT.Invoke(col.transform.parent.gameObject.GetEntityId());

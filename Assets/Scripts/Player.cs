@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private LineRenderer tracerLineRenderer; // Assign a LineRenderer here
     [SerializeField] private float tracerDuration = 0.1f;    // How long the flash stays on screen
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private ParticleSystem particleSystem;
 
     private Camera mainCamera;
     private Vector2 mouseScreenPos;
@@ -78,6 +79,9 @@ public class Player : MonoBehaviour
 
     private void ShootRaycast(Vector3 targetPosition)
     {
+        Events.PLAY_SOUND_EVENT.Invoke(new PlaySoundEventData(Sounds.SHOOT, "Player"));
+        particleSystem.Play();
+        
         // Use the firePoint position if assigned, otherwise fall back to the gun's position
         Vector2 origin = firePoint != null ? (Vector2)firePoint.position : (Vector2) gun.position;
         

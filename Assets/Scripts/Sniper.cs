@@ -31,6 +31,7 @@ public class Sniper : MonoBehaviour
     [SerializeField] private float weakPointTimerThreshold = 5f;
     [SerializeField] private bool isAlive;
     [SerializeField] private bool isAlternateWeakPointTime = true; // Tracks 5th, 15th, 25th vs 10th, 20th, 30th
+    [SerializeField] private ParticleSystem particleSystem;
     
     // Track the coroutine to safely stop it if the sniper dies mid-shot
     private Coroutine activeFireRoutine;
@@ -165,6 +166,8 @@ public class Sniper : MonoBehaviour
 
     private void ShootRaycast(Vector3 targetPosition)
     {
+        Events.PLAY_SOUND_EVENT.Invoke(new PlaySoundEventData(Sounds.SHOOT, "Sniper"));
+        particleSystem.Play();
         // Use the firePoint position if assigned, otherwise fall back to the gun's position
         Vector2 origin = firePoint != null ? (Vector2)firePoint.position : (Vector2)gun.position;
         

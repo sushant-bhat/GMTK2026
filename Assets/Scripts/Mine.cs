@@ -9,6 +9,7 @@ public class Mine : MonoBehaviour
     [SerializeField] private LayerMask targetLayers;
     [SerializeField] private int maxTargetsCount = 50;
     [SerializeField] private int maxBlastVictimsCount = 20;
+    [SerializeField] private ParticleSystem[] particleSystems;
 
     void Awake()
     {
@@ -31,6 +32,13 @@ public class Mine : MonoBehaviour
     }
     public void ExplodeAndDetect()
     {
+        
+        Events.PLAY_SOUND_EVENT.Invoke(new PlaySoundEventData(Sounds.SHOOT, "Mine"));
+        Debug.Log("Mine particle play");
+        foreach (var particleSystem in particleSystems)
+        {
+            particleSystem.Play();
+        }
         Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, 1));
 
         // Create a pre-allocated array to avoid Garbage Collection (GC) spikes at runtime

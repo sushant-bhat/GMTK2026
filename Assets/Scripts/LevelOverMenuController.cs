@@ -4,6 +4,7 @@ using UnityEngine;
 public class LevelOverMenuController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI result;
+    [SerializeField] private GameObject levelOverMenu;
     [SerializeField] private GameObject tryAgainButton;
     [SerializeField] private GameObject nextLevelButton;
 
@@ -14,6 +15,7 @@ public class LevelOverMenuController : MonoBehaviour
 
     private void OnLevelOver(LevelOverReason reason)
     {
+        levelOverMenu.SetActive(true);
         if (reason.Equals(LevelOverReason.ENEMIES_KILLED))
         {
             result.text = "Your troop lives another day!";

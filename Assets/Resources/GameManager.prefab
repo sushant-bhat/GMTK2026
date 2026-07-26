@@ -387,6 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   result: {fileID: 6895988422391158849}
+  levelOverMenu: {fileID: 4458758210847733875}
   tryAgainButton: {fileID: 5850769081450041998}
   nextLevelButton: {fileID: 2096467491308339891}
 --- !u!1 &1746948094345929676
@@ -918,6 +919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da853ab5ca79e541be5e6dfc943cdef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  sessionSettings: {fileID: 0}
 --- !u!1 &3759410510835842838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,6 +1807,7 @@ MonoBehaviour:
   startLevel: current
   pauseMenu: {fileID: 2391866934585976189}
   levelOverMenu: {fileID: 4458758210847733875}
+  sessionSettings: {fileID: 0}
 --- !u!1 &6356077476373346728
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class Tanker : MonoBehaviour
     [SerializeField] private LayerMask targetLayers;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject canonPrefab;
+    [SerializeField] private ParticleSystem particleSystem;
 
 
     // Animation parameter hashes for performance
@@ -112,6 +113,9 @@ public class Tanker : MonoBehaviour
 
     private void FireWeapon(Vector3 targetPosition)
     {
+        Events.PLAY_SOUND_EVENT.Invoke(new PlaySoundEventData(Sounds.SHOOT, "Tanker"));
+        particleSystem.Play();
+
         // 1. Rotate the gun toward the target from its pivot point
         Vector3 pivotDirection = targetPosition - gun.position;
         float angle = Mathf.Atan2(pivotDirection.y, pivotDirection.x) * Mathf.Rad2Deg;
