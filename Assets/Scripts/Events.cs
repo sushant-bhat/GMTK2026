@@ -10,16 +10,28 @@ public class Events
     public static UnityEvent<EntityId> BULLET_SHOT_EVENT = new();
     public static UnityEvent<EntityId> CANON_SHOT_EVENT = new();
     public static UnityEvent<EntityId> WORM_EATEN_EVENT = new();
+    public static UnityEvent<string> SCENE_CHANGE_EVENT = new();
+    public static UnityEvent<KilledEventData> KILLED_EVENT = new();
+    public static UnityEvent GAME_PAUSE_EVENT = new();
+    public static UnityEvent GAME_RESUME_EVENT = new();
 
 }
 
-// public struct MineBlastEventData
-// {
+public enum KilledType
+{
+    SOLDIER,
+    ENEMY
+}
 
+public struct KilledEventData
+{
+    public KilledType killedType;
+    public int number;
 
-//     public SceneChangeEventData(SCENES scene = SCENES.CURR, MENUS menu = MENUS.NONE) {
-//         this.scene = scene;
-//         this.menu = menu;
-//     }
-// }
+    public KilledEventData(KilledType killedType, int number)
+    {
+        this.killedType = killedType;
+        this.number = number;
+    }
+}
 

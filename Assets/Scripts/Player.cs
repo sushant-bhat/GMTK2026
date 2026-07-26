@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [Header("Visual Effects")]
     [SerializeField] private LineRenderer tracerLineRenderer; // Assign a LineRenderer here
     [SerializeField] private float tracerDuration = 0.1f;    // How long the flash stays on screen
+    [SerializeField] private PlayerInput playerInput;
 
     private Camera mainCamera;
     private Vector2 mouseScreenPos;
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
         canBeShotTags.Add("Worm");
         canBeShotTags.Add("Mine");
         canBeShotTags.Add("Officer");
+        Events.GAME_RESUME_EVENT.AddListener(ResumeGame);
     }
 
     // 1. Called via Unity Event whenever the mouse moves
@@ -128,5 +130,16 @@ public class Player : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    }
+
+    public void PauseGame()
+    {
+        playerInput.enabled = false;
+        Events.GAME_PAUSE_EVENT.Invoke();
+    }
+
+    public void ResumeGame()
+    {
+        playerInput.enabled = true;
     }
 }

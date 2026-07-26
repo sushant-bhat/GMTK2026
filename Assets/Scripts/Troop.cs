@@ -9,6 +9,7 @@ public class Troop : MonoBehaviour
     [SerializeField] private int id = 1;
     [SerializeField] private float speed = 10f;
     [SerializeField] private float dir = -1f;
+    [SerializeField] private bool isAlive;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,6 +17,7 @@ public class Troop : MonoBehaviour
         GetComponent<Rigidbody2D>().linearVelocity =  dir * speed * transform.right;
         Events.MINE_BLAST_EVENT.AddListener(OnMineBlast);
         Events.CANON_SHOT_EVENT.AddListener(OnCanonShot);
+        isAlive = true;
     }
 
     private void OnCanonShot(EntityId id)
@@ -37,6 +39,7 @@ public class Troop : MonoBehaviour
 
     private void KillTroop()
     {
+        if (!isAlive) return;
         Debug.Log("Troop " + id + " got blasted");
         Animator[] soldierAnimators = GetComponentsInChildren<Animator>();
         
@@ -45,5 +48,7 @@ public class Troop : MonoBehaviour
             soldierAnimators[i].SetTrigger(DeathHash);
         }
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+        isAlive = false;
+        Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.SOLDIER, soldierAnimators.Length));
     }
 }

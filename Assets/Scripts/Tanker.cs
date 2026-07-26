@@ -39,6 +39,7 @@ public class Tanker : MonoBehaviour
         {
             tankerAnimator.SetTrigger(DeathHash);
             isAlive = false;
+            Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, 1));
         }
     }
 
@@ -48,6 +49,7 @@ public class Tanker : MonoBehaviour
         {
             tankerAnimator.SetTrigger(DestroyHash);
             isAlive = false;
+            Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, 1));
         }
     }
 

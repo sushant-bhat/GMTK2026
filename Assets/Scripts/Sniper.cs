@@ -57,6 +57,7 @@ public class Sniper : MonoBehaviour
             sniperAnimator.SetBool(IsShootingHash, false);
             sniperAnimator.SetTrigger(DeathHash);
             isAlive = false;
+            Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, 1));
         }
     }
 

@@ -42,6 +42,7 @@ public class MachineGun : MonoBehaviour
             StopCoroutine(activeFireRoutine);
             mgAnimator.SetTrigger(DeathHash);
             isAlive = false;
+            Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, 1));
         }
     }
 
