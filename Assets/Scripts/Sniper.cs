@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Sniper : MonoBehaviour
 {
+    private static readonly int ShootHash = Animator.StringToHash("shoot");
     private static readonly int DeathHash = Animator.StringToHash("death");
     private static readonly WaitForSeconds _waitForSeconds1 = new(1f);
     
@@ -23,7 +24,6 @@ public class Sniper : MonoBehaviour
 
 
     // Animation parameter hashes for performance
-    private static readonly int IsShootingHash = Animator.StringToHash("isShooting");
 
     [SerializeField] private float soldierTimer = 0f;
     [SerializeField] private float soldierTimerThreshold = 2f;
@@ -56,7 +56,6 @@ public class Sniper : MonoBehaviour
                 activeFireRoutine = null;
             }
 
-            sniperAnimator.SetBool(IsShootingHash, false);
             sniperAnimator.SetTrigger(DeathHash);
             isAlive = false;
             Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, 1));
@@ -78,23 +77,25 @@ public class Sniper : MonoBehaviour
         weakPointTimer += Time.deltaTime;
 
         // Check weak point timer first (every 5 seconds)
-        if (weakPointTimer >= weakPointTimerThreshold)
-        {
-            weakPointTimer = 0f; // Reset loop
+        // if (weakPointTimer >= weakPointTimerThreshold)
+        // {
+        //     weakPointTimer = 0f; // Reset loop
 
-            if (isAlternateWeakPointTime)
-            {
-                ShootWeakPoint();
-            }
+        //     if (isAlternateWeakPointTime)
+        //     {
+        //         ShootWeakPoint();
+        //     }
             
-            // Toggle so it only fires on the 5th, 15th, 25th, etc.
-            isAlternateWeakPointTime = !isAlternateWeakPointTime;
-        }
+        //     // Toggle so it only fires on the 5th, 15th, 25th, etc.
+        //     isAlternateWeakPointTime = !isAlternateWeakPointTime;
+        // }
         // If it's not time to shoot the weak point, check the soldier timer (every 2 seconds)
-        else if (soldierTimer >= soldierTimerThreshold)
+        if (soldierTimer >= soldierTimerThreshold)
         {
             soldierTimer = 0f;
-            ShootClosestSoldier();
+            // 2. Trigger shoot animation
+            Debug.Log("Set shooting true");
+            sniperAnimator.SetTrigger(ShootHash);
         }
     }
 
@@ -147,19 +148,12 @@ public class Sniper : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         gun.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        // 2. Trigger shoot animation
-        Debug.Log("Set shooting true");
-        sniperAnimator.SetBool(IsShootingHash, true);
         
         // 3. Fire the single raycast shot
         ShootRaycast(targetPosition);
 
         // 4. Delay to let animation play out (adjust as needed)
         yield return _waitForSeconds1;
-
-        // 5. Reset to crouch state
-        Debug.Log("Set shooting false");
-        sniperAnimator.SetBool(IsShootingHash, false);
         
         activeFireRoutine = null;
     }

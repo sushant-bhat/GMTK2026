@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6442939510077413850}
   - component: {fileID: 6521626297693915795}
   - component: {fileID: 1297717165780289229}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Troop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3250211539143846050}
   - component: {fileID: 7757834623489042485}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Body
   m_TagString: Troop
   m_Icon: {fileID: 0}

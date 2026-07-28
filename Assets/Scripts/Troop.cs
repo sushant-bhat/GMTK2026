@@ -15,25 +15,16 @@ public class Troop : MonoBehaviour
     void Start()
     {
         GetComponent<Rigidbody2D>().linearVelocity =  dir * speed * transform.right;
-        Events.MINE_BLAST_EVENT.AddListener(OnMineBlast);
-        Events.CANON_SHOT_EVENT.AddListener(OnCanonShot);
+        Events.TROOP_KILLED_EVENT.AddListener(OnTroopKilled);
         Events.PLAY_SOUND_EVENT.Invoke(new PlaySoundEventData(Sounds.SHOOT, "Troop"));
         isAlive = true;
     }
 
-    private void OnCanonShot(EntityId id)
+    private void OnTroopKilled(EntityId id)
     {
         if (gameObject.GetEntityId().Equals(id))
         {
             Debug.Log("Kill troop");
-            KillTroop();
-        }
-    }
-
-    private void OnMineBlast(HashSet<EntityId> idSet)
-    {
-        if(idSet.Contains(gameObject.GetEntityId()))
-        {
             KillTroop();
         }
     }

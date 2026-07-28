@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float speed = 15f;
     [SerializeField] private float lifetime = 3f;
-    [SerializeField] private float dir = -1f;
     [SerializeField] private ParticleSystem particleSystem;
     private HashSet<string> canBeShotTags = new();
 
@@ -14,7 +12,7 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        canBeShotTags.Add("Troop");
+        canBeShotTags.Add("Soldier");
         canBeShotTags.Add("Worm");
         Destroy(gameObject, lifetime);
     }

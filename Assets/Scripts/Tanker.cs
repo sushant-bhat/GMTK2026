@@ -96,7 +96,7 @@ public class Tanker : MonoBehaviour
 
         foreach (Collider2D collider in hitColliders)
         {
-            if (!collider.CompareTag("Troop")) continue; 
+            if (!collider.CompareTag("Soldier")) continue; 
 
             Vector3 directionToTarget = collider.transform.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;

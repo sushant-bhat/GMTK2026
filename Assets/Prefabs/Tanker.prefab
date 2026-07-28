@@ -406,7 +406,7 @@ MonoBehaviour:
   detectionRadius: 15
   targetLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1024
   firePoint: {fileID: 8976359361708673343}
   canonPrefab: {fileID: 5341086220074838233, guid: 42129b3d5e2f2b44ea4c79c14dd3f1d3, type: 3}
   particleSystem: {fileID: 4969388329142329693}

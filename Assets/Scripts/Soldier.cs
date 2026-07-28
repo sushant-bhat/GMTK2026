@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Soldier : MonoBehaviour
@@ -10,7 +12,21 @@ public class Soldier : MonoBehaviour
     {
         Events.BULLET_SHOT_EVENT.AddListener(OnKilled);
         Events.WORM_EATEN_EVENT.AddListener(OnKilled);
+        Events.MINE_BLAST_EVENT.AddListener(OnTroopKilledByMine);
+        Events.CANON_SHOT_EVENT.AddListener(OnTroopKilled);
         isAlive = true;
+    }
+
+    private void OnTroopKilledByMine(HashSet<EntityId> idSet)
+    {
+        if (!idSet.Contains(gameObject.GetEntityId())) return;
+        Events.TROOP_KILLED_EVENT.Invoke(transform.parent.gameObject.GetEntityId());
+    }
+
+    private void OnTroopKilled(EntityId id)
+    {
+        if (!gameObject.GetEntityId().Equals(id)) return;
+        Events.TROOP_KILLED_EVENT.Invoke(transform.parent.gameObject.GetEntityId());
     }
 
     private void OnKilled(EntityId id)

@@ -10,6 +10,7 @@ public class Events
     public static UnityEvent<EntityId> BULLET_SHOT_EVENT = new();
     public static UnityEvent<EntityId> CANON_SHOT_EVENT = new();
     public static UnityEvent<EntityId> WORM_EATEN_EVENT = new();
+    public static UnityEvent<EntityId> TROOP_KILLED_EVENT = new();
     public static UnityEvent<string> SCENE_CHANGE_EVENT = new();
     public static UnityEvent<string> TRIGGER_TUTORIAL_EVENT = new();
     public static UnityEvent<PlaySoundEventData> PLAY_SOUND_EVENT = new();

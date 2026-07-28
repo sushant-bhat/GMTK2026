@@ -21,7 +21,7 @@ TagManager:
   - Water
   - UI
   - Projectile
-  - Troop
+  - 
   - Env
   - Deck
   - Soldier
@@ -31,7 +31,7 @@ TagManager:
   - Sniper
   - MG
   - Interactable
-  - 
+  - Field
   - 
   - 
   - 
