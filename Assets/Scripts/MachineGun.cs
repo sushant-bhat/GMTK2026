@@ -4,6 +4,7 @@ using UnityEngine;
 public class MachineGun : MonoBehaviour
 {
     private static readonly int DeathHash = Animator.StringToHash("death");
+    private static readonly int DodgeHash = Animator.StringToHash("dodge");
 
     // Animation parameter hashes for performance
     private static readonly int IsShootingHash = Animator.StringToHash("isShooting");
@@ -25,6 +26,7 @@ public class MachineGun : MonoBehaviour
 
     [SerializeField] private int bulletBurstCount = 15;
     [SerializeField] private float soldierTimer = 8f;
+    [SerializeField] private int maxTimesSniperDodges = 3;
     [SerializeField] private float soldierTimerThreshold = 10f;
     [SerializeField] private bool isAlive;
     private Coroutine activeFireRoutine;
@@ -42,9 +44,16 @@ public class MachineGun : MonoBehaviour
         {
             Debug.Log("Machine gunner shot");
             StopCoroutine(activeFireRoutine);
-            mgAnimator.SetTrigger(DeathHash);
-            isAlive = false;
-            Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, 1));
+            if (maxTimesSniperDodges > 0)
+            {
+                mgAnimator.SetTrigger(DodgeHash);
+                maxTimesSniperDodges--;
+            } else
+            {
+                mgAnimator.SetTrigger(DeathHash);
+                isAlive = false;
+                Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, 1));
+            }
         }
     }
 

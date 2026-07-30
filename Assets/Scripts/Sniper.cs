@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Sniper : MonoBehaviour
 {
+    private static readonly int DodgeHash = Animator.StringToHash("dodge");
     private static readonly int ShootHash = Animator.StringToHash("shoot");
     private static readonly int DeathHash = Animator.StringToHash("death");
     private static readonly WaitForSeconds _waitForSeconds1 = new(1f);
@@ -29,6 +30,7 @@ public class Sniper : MonoBehaviour
     [SerializeField] private float soldierTimerThreshold = 2f;
     [SerializeField] private float weakPointTimer = 0f;
     [SerializeField] private float weakPointTimerThreshold = 5f;
+    [SerializeField] private int maxTimesSniperDodges = 3;
     [SerializeField] private bool isAlive;
     [SerializeField] private bool isAlternateWeakPointTime = true; // Tracks 5th, 15th, 25th vs 10th, 20th, 30th
     [SerializeField] private ParticleSystem particleSystem;
@@ -56,9 +58,17 @@ public class Sniper : MonoBehaviour
                 activeFireRoutine = null;
             }
 
-            sniperAnimator.SetTrigger(DeathHash);
-            isAlive = false;
-            Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, 1));
+            if (maxTimesSniperDodges > 0)
+            {
+                sniperAnimator.SetTrigger(DodgeHash);
+                maxTimesSniperDodges--;
+            } else
+            {
+                sniperAnimator.SetTrigger(DeathHash);
+                isAlive = false;
+                Events.KILLED_EVENT.Invoke(new KilledEventData(KilledType.ENEMY, 1));
+            }
+
         }
     }
 

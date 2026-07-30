@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float tracerDuration = 0.1f;    // How long the flash stays on screen
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private int maxPlayerBullets = 5;
 
     private Camera mainCamera;
     private Vector2 mouseScreenPos;
@@ -55,10 +56,16 @@ public class Player : MonoBehaviour
         // Only trigger the weapon discharge when the button is first pressed down
         if (context.started)
         {
+            if (maxPlayerBullets <= 0)
+            {
+                Debug.Log("Bullets finished, play empty clip sound");
+                return;
+            }
             Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, transform.position.z));
             
             // Fire using instant raycast detection instead of spawning a projectile prefab
             ShootRaycast(mouseWorldPos);
+            maxPlayerBullets--;
         }
     }
 
